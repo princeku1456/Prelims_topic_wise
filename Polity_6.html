@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Quiz - Chapter -2 & 3 </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .question {
+            margin-bottom: 20px;
+        }
+        .option {
+            cursor: pointer;
+            padding: 10px;
+        }
+        .correct {
+            background-color: #d4edda !important;
+            color: green;
+        }
+        .incorrect {
+            background-color: #f8d7da !important;
+            color: red;
+        }
+        .explanation {
+            color: blue;
+        }
+        .center-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container center-div">
+        <div class="col-lg-8 col-md-10 col-sm-12 p-5 border rounded shadow-lg">
+            <h3 class="text-center mb-4">MCQ Quiz - Chapter 10 & 11</h3>
+            <div id="quiz-container">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+
+            <button class="btn btn-primary mt-3" onclick="submitQuiz()">Submit</button>
+            <div id="result" class="mt-4"></div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions
+        const questions = [
+    {
+      "text": "Which article of the Indian Constitution deals with the amendment of the Constitution?",
+      "options": [
+        "Article 358",
+        "Article 368",
+        "Article 352",
+        "Article 360"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Article 368 lays down the procedure for amending the Constitution."
+    },
+    {
+      "text": "Which of the following is NOT a method of amending the Constitution?",
+      "options": [
+        "Simple Majority",
+        "Special Majority",
+        "Special Majority and Ratification by States",
+        "Unanimous Vote"
+      ],
+      "correctAnswer": 3,
+      "explanation": "The Constitution does not require a unanimous vote for any amendment."
+    },
+    {
+      "text": "What type of majority is required in Parliament to amend the provisions related to election of the President?",
+      "options": [
+        "Simple Majority",
+        "Special Majority",
+        "Special Majority and Ratification by States",
+        "Unanimous Vote"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Amendments related to the election of the President require a special majority in Parliament and ratification by at least half of the states."
+    },
+    {
+      "text": "What proportion of states must ratify an amendment concerning the election of the President?",
+      "options": [
+        "One-third",
+        "One-half",
+        "Two-thirds",
+        "All states"
+      ],
+      "correctAnswer": 1,
+      "explanation": "At least half of the states must ratify amendments related to the election of the President."
+    },
+    {
+      "text": "Can the President return a Constitutional Amendment Bill for reconsideration?",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The President cannot return a Constitutional Amendment Bill for reconsideration."
+    },
+    {
+      "text": "What is the term for an amendment made to rectify the defects in the original Constitution?",
+      "options": [
+        "Basic Structure Amendment",
+        "Judicial Review Amendment",
+        "Consequential Amendment",
+        "Procedural Amendment"
+      ],
+      "correctAnswer": 2,
+      "explanation": "This type of amendment is called a Consequential Amendment as it is necessary to give effect to the main amendment."
+    },
+    {
+      "text": "Which amendment act introduced the Goods and Services Tax (GST)?",
+      "options": [
+        "100th Amendment Act",
+        "101st Amendment Act",
+        "99th Amendment Act",
+        "102nd Amendment Act"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The 101st Amendment Act paved the way for the introduction of GST."
+    },
+    {
+      "text": "Can an amendment to the Constitution be challenged in a court of law?",
+      "options": [
+        "Yes, all amendments can be challenged.",
+        "No, no amendments can be challenged.",
+        "Yes, but only if it violates the basic structure of the Constitution.",
+        "Only amendments passed by a simple majority can be challenged."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Basic Structure Doctrine allows amendments to be challenged if they violate the basic structure of the Constitution."
+    },
+    {
+      "text": "Consider the following statements:<br>1. The Indian Constitution is a rigid constitution.<br>2. The procedure for amending the Indian Constitution is similar to the procedure for passing an ordinary law.",
+      "options": [
+        "Only Statement 1",
+        "Only Statement 2",
+        "Both Statement 1 and Statement 2",
+        "Neither Statement 1 nor Statement 2"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The Indian Constitution is rigid as it requires a special procedure for amendment, unlike an ordinary law."
+    },
+    {
+      "text": "Consider the following statements:<br>1. The power to amend the Constitution of India lies with the Parliament.<br>2. The state legislatures have no role in the amendment of the Constitution.",
+      "options": [
+        "Only Statement 1",
+        "Only Statement 2",
+        "Both Statement 1 and Statement 2",
+        "Neither Statement 1 nor Statement 2"
+      ],
+      "correctAnswer": 0,
+      "explanation": "While the Parliament has the primary role, state ratification is needed for some amendments."
+    },
+    {
+      "text": "Consider the following statements:<br>1. Article 368 provides for three types of amendments to the Constitution.<br>2. Ratification by states is required for all three types of amendments.",
+      "options": [
+        "Only Statement 1",
+        "Only Statement 2",
+        "Both Statement 1 and Statement 2",
+        "Neither Statement 1 nor Statement 2"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Article 368 provides for three types of amendments, but state ratification is needed only for some."
+    },
+    {
+      "text": "Consider the following statements regarding the Basic Structure Doctrine:<br>1. It was evolved by the Supreme Court in the Kesavananda Bharati case (1973).<br>2. It implies that the Parliament can amend any part of the Constitution.",
+      "options": [
+        "Only Statement 1",
+        "Only Statement 2",
+        "Both Statement 1 and Statement 2",
+        "Neither Statement 1 nor Statement 2"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The Basic Structure Doctrine, established in the Kesavananda Bharati case, limits the Parliament's amending power."
+    },
+    {
+      "text": "The concept of 'Basic Structure' of the Constitution was first established in which landmark case?",
+      "options": [
+        "A. K. Gopalan v. State of Madras",
+        "Maneka Gandhi v. Union of India",
+        "Kesavananda Bharati v. State of Kerala",
+        "Minerva Mills v. Union of India"
+      ],
+      "correctAnswer": 2,
+      "explanation": "This landmark case gave rise to the Basic Structure Doctrine."
+    },
+    {
+      "text": "Which of the following is NOT considered a part of the 'Basic Structure' of the Indian Constitution?",
+      "options": [
+        "Supremacy of the Constitution",
+        "Rule of Law",
+        "The provision for a bicameral legislature",
+        "Independence of the Judiciary"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The basic structure is about core features, not specific structural arrangements like bicameralism."
+    },
+    {
+      "text": "The 'Basic Structure Doctrine' limits the power of which entity?",
+      "options": [
+        "The President",
+        "The Supreme Court",
+        "The Parliament",
+        "The State Legislatures"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Basic Structure Doctrine primarily limits the Parliament's power to amend the Constitution."
+    },
+    {
+      "text": "What is the primary implication of the 'Basic Structure Doctrine'?",
+      "options": [
+        "The Parliament has unlimited power to amend the Constitution.",
+        "The judiciary can strike down any law passed by the Parliament.",
+        "There are certain fundamental features of the Constitution that cannot be altered by amendment.",
+        "The President has absolute veto power over Constitutional amendments."
+      ],
+      "correctAnswer": 2,
+      "explanation": "This is the essence of the Basic Structure Doctrine - certain fundamental features cannot be altered."
+    },
+    {
+      "text": "The Basic Structure doctrine is primarily concerned with protecting:",
+      "options": [
+        "The interests of the ruling party.",
+        "The fundamental rights of citizens.",
+        "The privileges of Parliament.",
+        "The powers of the President."
+      ],
+      "correctAnswer": 1,
+      "explanation": "While the Basic Structure encompasses more, protecting fundamental rights is a key aspect."
+    },
+    {
+      "text": "Consider the following statements:<br>1. The Basic Structure Doctrine is explicitly mentioned in the Constitution.<br>2. It is a result of judicial interpretation and pronouncements.",
+      "options": [
+        "Only Statement 1",
+        "Only Statement 2",
+        "Both Statement 1 and Statement 2",
+        "Neither Statement 1 nor Statement 2"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The Basic Structure Doctrine is not explicitly mentioned but is a product of judicial interpretation."
+    },
+    {
+      "text": "Consider the following statements:<br>1. The Kesavananda Bharati case upheld the unlimited power of the Parliament to amend the Constitution.<br>2. The case introduced the concept of judicial review over Constitutional amendments.",
+      "options": [
+        "Only Statement 1",
+        "Only Statement 2",
+        "Both Statement 1 and Statement 2",
+        "Neither Statement 1 nor Statement 2"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Kesavananda Bharati introduced judicial review over amendments, limiting the Parliament's power."
+    },
+    {
+      "text": "Consider the following statements:<br>1. The Basic Structure Doctrine provides absolute immunity to the fundamental rights from any amendment.<br>2. The doctrine aims to preserve the essential features of the Constitution that underpin its identity and character.",
+      "options": [
+        "Only Statement 1",
+        "Only Statement 2",
+        "Both Statement 1 and Statement 2",
+        "Neither Statement 1 nor Statement 2"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The doctrine preserves core features but doesn't make fundamental rights completely immune to change."
+    },
+    {
+      "text": "Consider the following as features of the Indian Constitution:<br>1. Federalism<br>2. Secularism<br>3. Republican form of government",
+      "options": [
+        "Only Feature 1",
+        "Only Feature 2",
+        "Only Feature 3",
+        "All of the above"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Federalism, secularism, and the republican form of government are all considered part of the basic structure."
+    },
+    {
+      "text": "Which of the following is NOT a ground for imposing reasonable restrictions on the freedom of speech and expression under Article 19(2)?",
+      "options": [
+        "Sovereignty and integrity of India",
+        "Public order",
+        "Political criticism of the government",
+        "Decency or morality"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Political criticism of the government is a democratic right and not a ground for restricting free speech."
+    },
+    {
+      "text": "The Ninth Schedule of the Indian Constitution was introduced by which amendment?",
+      "options": [
+        "First Amendment Act",
+        "Fourth Amendment Act",
+        "Seventh Amendment Act",
+        "Ninth Amendment Act"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The First Amendment Act introduced the Ninth Schedule in 1951."
+    },
+    {
+      "text": "What is the purpose of the Ninth Schedule?",
+      "options": [
+        "To specify the fundamental duties of citizens",
+        "To list the subjects on which the Parliament and state legislatures can make laws",
+        "To protect certain laws from judicial review",
+        "To define the powers of the President during a national emergency"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Laws in the Ninth Schedule are shielded from being struck down by courts."
+    },
+    {
+      "text": "The Supreme Court's judgement in the I.R. Coelho case (2007) did what to the Ninth Schedule?",
+      "options": [
+        "Expanded the scope of laws that could be included in the Ninth Schedule",
+        "Upheld the absolute immunity of Ninth Schedule laws from judicial review",
+        "Held that laws included in the Ninth Schedule after April 24, 1973, could be challenged on the ground of violating the basic structure",
+        "Abolished the Ninth Schedule altogether"
+      ],
+      "correctAnswer": 2,
+      "explanation": "This judgement limited the Ninth Schedule's protection by allowing challenges to laws added after April 24, 1973."
+    },
+    {
+      "text": "Which of the following is NOT a criticism of the Ninth Schedule?",
+      "options": [
+        "It undermines the principle of judicial review.",
+        "It has been used to protect laws that violate fundamental rights.",
+        "It strengthens the federal structure of the Constitution.",
+        "It allows for the arbitrary inclusion of laws without proper scrutiny."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Ninth Schedule is criticized for centralizing power and potentially undermining state autonomy, not strengthening federal structure."
+    },
+    {
+      "text": "The concept of 'due process of law' is enshrined in which article of the Indian Constitution?",
+      "options": [
+        "Article 14",
+        "Article 19",
+        "Article 21",
+        "Article 32"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Article 21 guarantees the right to life and personal liberty, protected by due process of law."
+    },
+    {
+      "text": "What does 'due process of law' guarantee?",
+      "options": [
+        "Speedy trial",
+        "Free legal aid",
+        "Fair and just legal procedures before depriving a person of life or personal liberty",
+        "Right to remain silent"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Due process ensures procedural fairness in matters of life and personal liberty."
+    },
+    {
+      "text": "Which of the following is a writ issued by the Supreme Court or High Courts for the enforcement of Fundamental Rights?",
+      "options": [
+        "Habeas Corpus",
+        "Mandamus",
+        "Certiorari",
+        "All of the above"
+      ],
+      "correctAnswer": 3,
+      "explanation": "These are all writs that courts can issue to enforce fundamental rights."
+    },
+    {
+      "text": "The landmark case of Maneka Gandhi v. Union of India (1978) expanded the scope of which Fundamental Right?",
+      "options": [
+        "Right to Equality",
+        "Right to Freedom",
+        "Right to Life and Personal Liberty",
+        "Right to Freedom of Religion"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Maneka Gandhi's case broadened the understanding of Article 21 (Right to Life and Personal Liberty)."
+    },
+    {
+      "text": "What is the significance of the 44th Amendment Act (1978)?",
+      "options": [
+        "It introduced the Fundamental Duties.",
+        "It removed the Right to Property from the list of Fundamental Rights.",
+        "It imposed restrictions on the freedom of speech and expression.",
+        "It extended the reservation for SCs and STs in legislatures."
+      ],
+      "correctAnswer": 1,
+      "explanation": "This amendment shifted property rights from fundamental rights to legal rights."
+    },
+    {
+      "text": "Which of the following is a Directive Principle of State Policy?",
+      "options": [
+        "Right to Education",
+        "Right to Freedom of Religion",
+        "Right to Constitutional Remedies",
+        "Uniform Civil Code"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Uniform Civil Code is a Directive Principle aiming for a common personal law for all citizens."
+    },
+    {
+      "text": "What is the nature of Directive Principles of State Policy?",
+      "options": [
+        "They are justiciable, meaning they can be enforced by courts.",
+        "They are non-justiciable, meaning they cannot be enforced by courts.",
+        "They are fundamental rights, meaning they are enforceable by courts.",
+        "They are part of the basic structure, meaning they cannot be amended."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Directive Principles guide the government but aren't directly enforceable by courts."
+    },
+    {
+      "text": "The concept of 'Judicial Review' in India is borrowed from which country?",
+      "options": [
+        "United Kingdom",
+        "United States of America",
+        "France",
+        "Australia"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The concept of judicial review, where courts can review laws, is adopted from the US system."
+    },
+    {
+      "text": "Which of the following is a feature of the Indian Parliament?",
+      "options": [
+        "Bicameralism",
+        "Universal Adult Franchise",
+        "Parliamentary Sovereignty",
+        "Both (a) and (b)"
+      ],
+      "correctAnswer": 3,
+      "explanation": "The Indian Parliament is bicameral (two houses) and elections are based on universal adult franchise."
+    },
+    {
+      "text": "The power of the Indian Parliament to amend the Constitution is:",
+      "options": [
+        "Absolute and unlimited",
+        "Limited by the Basic Structure Doctrine",
+        "Subject to the veto power of the President",
+        "Controlled by the Supreme Court"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The Parliament can amend the Constitution, but not its core features as per the Basic Structure Doctrine."
+    },
+    {
+      "text": "The 'Preamble' to the Indian Constitution:",
+      "options": [
+        "Is a part of the basic structure.",
+        "Can be amended by a simple majority.",
+        "Is not enforceable in a court of law.",
+        "Was adopted after the Constitution came into force."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Preamble sets the context but doesn't grant specific enforceable rights."
+    },
+    {
+      "text": "The Indian Constitution can be described as:",
+      "options": [
+        "Purely federal",
+        "Purely unitary",
+        "Quasi-federal",
+        "Confederal"
+      ],
+      "correctAnswer": 2,
+      "explanation": "India has features of both federalism and a unitary system, making it quasi-federal."
+    },
+    {
+      "text": "The distribution of powers between the Centre and states in India is based on:",
+      "options": [
+        "The principle of separation of powers",
+        "The doctrine of harmonious construction",
+        "The Seventh Schedule of the Constitution",
+        "The principle of checks and balances"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Seventh Schedule outlines the division of legislative powers between the Centre and states."
+    },
+    {
+      "text": "The emergency provisions in the Indian Constitution:",
+      "options": [
+        "Can be invoked by the President only in times of war.",
+        "Empower the Centre to assume control of the state administration.",
+        "Can be imposed indefinitely without parliamentary approval.",
+        "Do not affect the fundamental rights of citizens."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Emergency provisions allow the Centre to intervene in state matters in specific situations."
+    }
+  ];
+  let score = 0;
+
+        // Dynamically create quiz questions
+        function loadQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = '';
+
+            questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<p><strong>${index + 1}. ${question.text}</strong></p>`;
+
+                question.options.forEach((option, optIndex) => {
+                    const label = document.createElement('label');
+                    label.className = 'option btn btn-outline-secondary d-block text-start';
+                    label.innerHTML = `
+                        <input type="radio" name="q${index}" value="${optIndex}" class="me-2">
+                        ${option}
+                    `;
+                    questionDiv.appendChild(label);
+                });
+
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'explanation mt-2 container';
+                explanationDiv.id = `explanation${index}`;
+                explanationDiv.style.display = 'none';
+                explanationDiv.innerHTML = `<p><strong>Explanation: </strong>${question.explanation}</p>`;
+                questionDiv.appendChild(explanationDiv);
+
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function submitQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const inputs = quizContainer.querySelectorAll('input[type="radio"]');
+            let answered = new Array(questions.length).fill(false);
+            score = 0;
+
+            // Reset any previous coloring
+            inputs.forEach(input => {
+                input.parentElement.classList.remove('correct', 'incorrect');
+            });
+
+            // Iterate over each question
+            questions.forEach((question, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const options = document.querySelectorAll(`input[name="q${index}"]`);
+
+                // Check if the question was answered
+                if (selected) {
+                    const selectedValue = parseInt(selected.value);
+
+                    // If answer is correct, add score, else deduct points
+                    if (selectedValue === question.correctAnswer) {
+                        score += 1;
+                        selected.parentElement.classList.add('correct');
+                    } else {
+                        score -= 0.25;
+                        selected.parentElement.classList.add('incorrect');
+                    }
+
+                    answered[index] = true;
+                }
+
+                // Mark correct answer if question was not answered or answered incorrectly
+                if (!answered[index] || selected.value != question.correctAnswer) {
+                    options[question.correctAnswer].parentElement.classList.add('correct');
+                }
+
+                // Show explanation for each question
+                document.getElementById(`explanation${index}`).style.display = 'block';
+            });
+
+            // Display the result
+            document.getElementById('result').innerHTML = `<h5>Your Score: ${score}</h5>`;
+        }
+
+        // Load the quiz on page load
+        window.onload = loadQuiz;
+    </script>
+
+</body>
+</html>

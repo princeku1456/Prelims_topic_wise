@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Quiz - Chapter -2 & 3 </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .question {
+            margin-bottom: 20px;
+        }
+        .option {
+            cursor: pointer;
+            padding: 10px;
+        }
+        .correct {
+            background-color: #d4edda !important;
+            color: green;
+        }
+        .incorrect {
+            background-color: #f8d7da !important;
+            color: red;
+        }
+        .explanation {
+            color: blue;
+        }
+        .center-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container center-div">
+        <div class="col-lg-8 col-md-10 col-sm-12 p-5 border rounded shadow-lg">
+            <h3 class="text-center mb-4">MCQ Quiz - Chapter 8&9</h3>
+            <div id="quiz-container">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+
+            <button class="btn btn-primary mt-3" onclick="submitQuiz()">Submit</button>
+            <div id="result" class="mt-4"></div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions
+        const questions =  [
+    {
+      "text": "Which Article of the Indian Constitution deals with the definition of the State?",
+      "options": [
+        "Article 37",
+        "Article 36",
+        "Article 38",
+        "Article 39"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Article 36 of the Indian Constitution deals with the definition of the State."
+    },
+    {
+      "text": "The Directive Principles of State Policy are included in which part of the Indian Constitution?",
+      "options": [
+        "Part IV",
+        "Part III",
+        "Part V",
+        "Part VI"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The Directive Principles of State Policy are included in Part IV of the Indian Constitution."
+    },
+    {
+      "text": "Which of the following is not a Gandhian principle enshrined in the Directive Principles?",
+      "options": [
+        "Promotion of cottage industries",
+        "Protection of the environment",
+        "Uniform Civil Code",
+        "Prohibition of intoxicating drinks and drugs"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Uniform Civil Code is not a Gandhian principle. It is a liberal-intellectual principle enshrined in the Directive Principles."
+    },
+    {
+      "text": "Which Article of the Indian Constitution directs the State to secure a Uniform Civil Code for the citizens?",
+      "options": [
+        "Article 43",
+        "Article 45",
+        "Article 44",
+        "Article 48"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Article 44 of the Indian Constitution directs the State to secure a Uniform Civil Code for the citizens."
+    },
+    {
+      "text": "Which Amendment Act of the Indian Constitution added the Fundamental Duties?",
+      "options": [
+        "42nd Amendment Act",
+        "42nd Amendment Act",
+        "44th Amendment Act",
+        "46th Amendment Act"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The 42nd Amendment Act of the Indian Constitution added the Fundamental Duties."
+    },
+    {
+      "text": "How many Fundamental Duties are enshrined in the Indian Constitution?",
+      "options": [
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "correctAnswer": 1,
+      "explanation": "There are 11 Fundamental Duties enshrined in the Indian Constitution."
+    },
+    {
+      "text": "Which Article of the Indian Constitution enumerates the Fundamental Duties?",
+      "options": [
+        "Article 50A",
+        "Article 51A",
+        "Article 52A",
+        "Article 53A"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Article 51A of the Indian Constitution enumerates the Fundamental Duties."
+    },
+    {
+      "text": "Which of the following is not a Fundamental Duty?",
+      "options": [
+        "To uphold and protect the sovereignty, unity and integrity of India",
+        "To value and preserve the rich heritage of our composite culture",
+        "To vote in all elections",
+        "To develop the scientific temper, humanism and the spirit of inquiry and reform"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Voting in all elections is not listed as a Fundamental Duty in the Indian Constitution."
+    },
+    {
+      "text": "Who recommended the inclusion of Fundamental Duties in the Indian Constitution?",
+      "options": [
+        "Swaran Singh Committee",
+        "Ashok Mehta Committee",
+        "Balwant Rai Mehta Committee",
+        "L. M. Singhvi Committee"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The Swaran Singh Committee recommended the inclusion of Fundamental Duties in the Indian Constitution."
+    },
+    {
+      "text": "Which part of the Indian Constitution deals with the Directive Principles of State Policy?",
+      "options": [
+        "Part I",
+        "Part II",
+        "Part III",
+        "Part IV"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Part IV of the Indian Constitution deals with the Directive Principles of State Policy."
+    },
+    {
+      "text": "Consider the following statements regarding the Directive Principles of State Policy:<br>1. They are legally enforceable by the courts<br>2. They aim to establish a welfare state<br>3. They promote the ideal of social and economic justice<br>4. They lay down positive obligations for the state",
+      "options": [
+        "1 and 2 only",
+        "2 and 3 only",
+        "2, 3 and 4 only",
+        "All of the above"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Statements 2, 3, and 4 are correct. Statement 1 is incorrect as Directive Principles are not legally enforceable by courts."
+    },
+    {
+      "text": "Which of the following Directive Principles aim to promote the ideal of a socialist state?<br>1. Equal pay for equal work<br>2. Protection of children from exploitation<br>3. Equitable distribution of material resources<br>4. Prevention of concentration of wealth",
+      "options": [
+        "1 and 2 only",
+        "3 and 4 only",
+        "1, 3 and 4 only",
+        "All of the above"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Statements 3 and 4 specifically aim to promote the ideal of a socialist state by focusing on equitable distribution of resources and preventing wealth concentration."
+    },
+    {
+      "text": "The Directive Principles of State Policy are:<br>1. Non-justiciable<br>2. Fundamental in the governance of the country<br>3. Aimed at establishing political democracy<br>4. Inspired by socialistic, Gandhian and liberal-intellectual principles",
+      "options": [
+        "1, 2 and 4 only",
+        "1 and 3 only",
+        "2, 3 and 4 only",
+        "All of the above"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Statements 1, 2, and 4 are correct. Statement 3 is incorrect as DPSPs aim to establish social and economic democracy, not political democracy."
+    },
+    {
+      "text": "Consider the following statements regarding Fundamental Duties:<br>1. They are enforceable by the courts<br>2. They promote a sense of patriotism and national unity<br>3. They were added to the Constitution on the recommendation of the Santhanam Committee<br>4. They aim to create a harmonious society",
+      "options": [
+        "1 and 2 only",
+        "2 and 4 only",
+        "1, 2 and 4 only",
+        "All of the above"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Only statements 2 and 4 are correct. Fundamental Duties are not legally enforceable (1 is wrong) and they were recommended by the Swaran Singh Committee, not Santhanam Committee (3 is wrong)."
+    },
+    {
+      "text": "Which of the following are criticisms levelled against the Directive Principles of State Policy?<br>1. They are no more than pious wishes<br>2. They lack legal force<br>3. They are too many and unwieldy<br>4. They are based on western models and not suitable for Indian conditions",
+      "options": [
+        "1 and 2 only",
+        "2 and 3 only",
+        "1, 2 and 3 only",
+        "All of the above"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Statements 1, 2, and 3 are common criticisms of DPSPs. Statement 4 is not a widely accepted criticism as DPSPs are actually drawn from various sources including Indian traditions."
+    },
+    {
+      "text": "Which of the following were aims behind the inclusion of Fundamental Duties in the Indian Constitution?<br>1. To remind citizens of their moral obligations<br>2. To provide a basis for the imposition of legal duties<br>3. To emphasize the importance of national unity and integrity<br>4. To curb subversive and anti-national activities",
+      "options": [
+        "1 and 2 only",
+        "1, 3 and 4 only",
+        "2, 3 and 4 only",
+        "All of the above"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Statements 1, 3, and 4 were the main aims behind including Fundamental Duties. Statement 2 is incorrect as they were not meant to be legally enforceable."
+    },
+    {
+      "text": "Which of the following Fundamental Duties emphasize the importance of scientific temper and environmental protection?<br>1. To develop the scientific temper, humanism and the spirit of inquiry and reform<br>2. To safeguard public property and to abjure violence<br>3. To protect and improve the natural environment including forests, lakes, rivers and wildlife, and to have compassion for living creatures<br>4. To uphold and protect the sovereignty, unity and integrity of India",
+      "options": [
+        "1 and 2 only",
+        "2 and 3 only",
+        "1 and 3 only",
+        "All of the above"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Only statements 1 and 3 specifically emphasize scientific temper and environmental protection respectively."
+    },
+    {
+      "text": "Consider the following statements regarding the significance of Directive Principles of State Policy:<br>1. They serve as a guide for the government in formulating its policies<br>2. They help in the establishment of a welfare state<br>3. They can be used to invalidate laws that violate them<br>4. They enable the opposition to hold the government accountable",
+      "options": [
+        "1 and 2 only",
+        "2 and 3 only",
+        "1, 2 and 4 only",
+        "All of the above"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Statements 1, 2, and 4 are correct. Statement 3 is incorrect as DPSPs cannot be used to invalidate laws since they are not legally enforceable."
+    },
+    {
+      "text": "The Directive Principles are said to be 'non-justiciable'. This means:<br>1. They cannot be enforced by the courts<br>2. The government can ignore them<br>3. They are only moral precepts<br>4. They are subordinate to the Fundamental Rights",
+      "options": [
+        "1 only",
+        "1 and 2 only",
+        "1, 3 and 4 only",
+        "All of the above"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Statements 1, 3, and 4 correctly explain the non-justiciable nature of DPSPs. Statement 2 is incorrect as the government cannot completely ignore them as they are fundamental in governance."
+    },
+    {
+      "text": "Which of the following were recommendations of the Ashok Mehta Committee on Panchayati Raj?<br>1. Two-tier system of Panchayati Raj<br>2. Compulsory powers of taxation to Panchayats<br>3. Establishment of separate Nyaya Panchayats<br>4. Direct elections to all tiers of Panchayats",
+      "options": [
+        "1 and 2 only",
+        "2 and 3 only",
+        "2, 3 and 4 only",
+        "All of the above"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Ashok Mehta Committee recommended compulsory powers of taxation, separate Nyaya Panchayats, and direct elections (statements 2, 3, and 4). It did not recommend a two-tier system."
+    },
+    {
+      "text": "Which of the following are differences between Fundamental Rights and Directive Principles of State Policy?<br>1. Fundamental Rights are justiciable while Directive Principles are not<br>2. Fundamental Rights are negative obligations for the state while Directive Principles are positive obligations<br>3. Fundamental Rights are enshrined in Part III of the Constitution while Directive Principles are enshrined in Part IV<br>4. Fundamental Rights aim to establish political democracy while Directive Principles aim to establish social and economic democracy",
+      "options": [
+        "1 and 2 only",
+        "2 and 3 only",
+        "1, 2 and 3 only",
+        "All of the above"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four statements correctly describe the differences between Fundamental Rights and Directive Principles of State Policy."
+    },
+    {
+      "text": "Which of the following highlight the limitations of Fundamental Duties?<br>1. They are not legally enforceable<br>2. They are vague and ambiguous<br>3. They do not cover all aspects of responsible citizenship<br>4. They may be used to suppress dissent",
+      "options": [
+        "1, 2 and 3 only",
+        "2 and 4 only",
+        "1, 3 and 4 only",
+        "All of the above"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Statements 1, 2, and 3 are recognized limitations of Fundamental Duties. Statement 4 is not widely considered a limitation."
+    },
+    {
+      "text": "The 73rd Amendment Act of 1992, added which part to the Constitution?",
+      "options": [
+        "Part VII",
+        "Part VIII",
+        "Part IX",
+        "Part X"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The 73rd Amendment Act of 1992 added Part IX to the Constitution, which deals with Panchayats."
+    },
+    {
+      "text": "Article 40 of the Indian Constitution relates to:",
+      "options": [
+        "Equal justice and free legal aid",
+        "Right to work, to education and to public assistance",
+        "Uniform civil code for the citizens",
+        "Organisation of village panchayats"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Article 40 of the Indian Constitution relates to the organisation of village panchayats."
+    },
+    {
+      "text": "The objective of the PESA Act of 1996 was to:",
+      "options": [
+        "Extend the provisions of the Panchayats to the Scheduled Areas",
+        "Provide financial assistance to Panchayats",
+        "Regulate the elections of Panchayats",
+        "Establish Nyaya Panchayats"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The PESA Act of 1996 was enacted to extend the provisions of the Panchayats to the Scheduled Areas."
+    },
+    {
+      "text": "The L.M. Singhvi Committee recommended:<br>1. Constitutional recognition of Panchayats<br>2. Direct elections to all posts of chairpersons<br>3. Establishment of Nyaya Panchayats<br>4. Reservation of seats for women",
+      "options": [
+        "1, 2 and 3 only",
+        "2 and 4 only",
+        "1, 3 and 4 only",
+        "All of the above"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The L.M. Singhvi Committee recommended constitutional recognition of Panchayats, establishment of Nyaya Panchayats, and reservation of seats for women (statements 1, 3, and 4)."
+    },
+    {
+      "text": "Which of the following are challenges faced by the Panchayati Raj system in India?<br>1. Lack of adequate financial resources<br>2. Interference from state governments<br>3. Domination by upper castes and influential groups<br>4. Lack of awareness among people about their rights and responsibilities",
+      "options": [
+        "1 and 2 only",
+        "2 and 3 only",
+        "1, 2 and 3 only",
+        "All of the above"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four statements represent genuine challenges faced by the Panchayati Raj system in India."
+    },
+    {
+      "text": "Consider the following statements:<br>1. The Directive Principles can be used to interpret the Fundamental Rights<br>2. The Supreme Court has held that the Directive Principles and Fundamental Rights are complementary to each other<br>3. Article 31C originally provided that laws made to implement certain Directive Principles could not be challenged in court",
+      "options": [
+        "1 and 2 only",
+        "2 and 3 only",
+        "1 and 3 only",
+        "All of the above"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All three statements are correct regarding the relationship between Directive Principles and Fundamental Rights."
+    },
+    {
+      "text": "Which of the following is not a feature of the Directive Principles of State Policy?",
+      "options": [
+        "They aim to establish social and economic justice",
+        "They are inspired by Gandhian principles",
+        "They are legally enforceable by the courts",
+        "They impose a moral obligation on the state"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The statement 'They are legally enforceable by the courts' is not a feature of the Directive Principles of State Policy. DPSPs are non-justiciable."
+    },
+    {
+      "text": "Which of the following statement(s) is/are incorrect about the Fundamental Duties?",
+      "options": [
+        "They were added by the 42nd Amendment Act",
+        "They aim to promote a sense of national unity and integrity",
+        "They are enforceable by the courts",
+        "They are inspired by the Constitution of the USSR"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The statement 'They are enforceable by the courts' is incorrect. Fundamental Duties are not legally enforceable."
+    },
+    {
+      "text": "Which of the following statements is correct regarding the Fundamental Duties?",
+      "options": [
+        "They were part of the original Constitution",
+        "They were incorporated on the recommendations of the Swaran Singh Committee",
+        "There are a total of 15 Fundamental Duties",
+        "Fundamental Duties are justiciable in nature"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The statement 'They were incorporated on the recommendations of the Swaran Singh Committee' is correct."
+    },
+    {
+      "text": "Which of the following is/are not a Directive Principle of State Policy?<br>1. To ensure equal pay for equal work<br>2. To provide free and compulsory military training to all citizens<br>3. To promote international peace and security<br>4. To separate the judiciary from the executive",
+      "options": [
+        "1 and 2 only",
+        "2 only",
+        "2 and 4 only",
+        "All of the above"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Statement 2 (providing free and compulsory military training) is not a Directive Principle of State Policy."
+    },
+    {
+      "text": "Which of the following are voluntary provisions of the 73rd Amendment Act?<br>1. Fixing the minimum age for contesting elections to Panchayats<br>2. Granting financial powers to the Panchayats<br>3. Providing reservation of seats for backward classes in Panchayats<br>4. Establishing Panchayats at the village, intermediate and district levels",
+      "options": [
+        "1 and 2 only",
+        "2 and 3 only",
+        "1, 2 and 3 only",
+        "2 and 3 only"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Granting financial powers to Panchayats and providing reservation for backward classes are voluntary provisions of the 73rd Amendment Act."
+    },
+    {
+      "text": "Which of the following committee(s) recommended a constitutional status for Panchayati Raj?",
+      "options": [
+        "L.M Singhvi Committee",
+        "Ashok Mehta Committee",
+        "G.V.K Rao Committee",
+        "Both 1 and 3"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Both the L.M Singhvi Committee and G.V.K Rao Committee recommended constitutional status for Panchayati Raj."
+    },
+    {
+      "text": "The PESA Act of 1996:<br>1. Was enacted to extend the provisions of the Panchayats to the Scheduled Areas<br>2. Empowered Gram Sabha to safeguard and preserve the traditions and customs of the people<br>3. Provided reservation for the Scheduled Tribes in Panchayats at all levels",
+      "options": [
+        "1 and 2 only",
+        "2 and 3 only",
+        "1, 2 and 3",
+        "None of the above"
+      ],
+      "correctAnswer": 2,
+      "explanation": "All three statements about the PESA Act of 1996 are correct."
+    },
+    {
+      "text": "Which of the following are features of the 73rd Constitutional Amendment Act (1992)?<br>1. It provides for the organisation of Gram Sabha in a village<br>2. It establishes a three-tier system of Panchayats at the village, intermediate, and district levels<br>3. It makes provision for reservation of seats for women in Panchayats at all levels<br>4. It empowers the state legislature to endow the Panchayats with such powers and authority as may be necessary to enable them to function as institutions of self-government",
+      "options": [
+        "1, 2 and 3 only",
+        "2, 3 and 4 only",
+        "1 and 4 only",
+        "All of the above"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four statements are features of the 73rd Constitutional Amendment Act of 1992."
+    },
+    {
+      "text": "Which of the following are criticisms of the Fundamental Duties?<br>1. They are not legally enforceable and therefore, lack teeth<br>2. They are vague and ambiguous, leaving room for arbitrary interpretation<br>3. Their inclusion in the Constitution reflects a distrust of citizens and a paternalistic approach",
+      "options": [
+        "1 and 2 only",
+        "2 and 3 only",
+        "1 and 3 only",
+        "All of the above"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All three statements represent valid criticisms of the Fundamental Duties."
+    },
+    {
+      "text": "Which of the following are arguments in favour of the Fundamental Duties?<br>1. They remind citizens of their responsibilities towards the nation and society<br>2. They help in promoting national unity and integration<br>3. They can be used to educate and sensitize citizens about their duties",
+      "options": [
+        "1 and 2 only",
+        "2 and 3 only",
+        "1 and 3 only",
+        "All of the above"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All three statements are valid arguments in favor of including Fundamental Duties in the Constitution."
+    },
+    {
+      "text": "Which of the following are Gandhian Directive Principles?<br>1. Promotion of cottage industries<br>2. Organisation of agriculture and animal husbandry on modern and scientific lines<br>3. Prohibition of the consumption of intoxicating drinks and drugs<br>4. Providing early childhood care and education to children below the age of six years",
+      "options": [
+        "1 and 2 only",
+        "3 and 4 only",
+        "1 and 3 only",
+        "All of the above"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Promotion of cottage industries and prohibition of intoxicating drinks and drugs (statements 1 and 3) are Gandhian Directive Principles."
+    },
+    {
+      "text": "Which of the following are socialist principles enshrined in the Directive Principles?<br>1. Just and humane conditions of work<br>2. Right to work<br>3. Living wage for workers<br>4. Participation of workers in the management of industries",
+      "options": [
+        "1 and 2 only",
+        "3 and 4 only",
+        "1, 2 and 3 only",
+        "All of the above"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four statements represent socialist principles enshrined in the Directive Principles of State Policy."
+    }
+  ]
+  let score = 0;
+
+        // Dynamically create quiz questions
+        function loadQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = '';
+
+            questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<p><strong>${index + 1}. ${question.text}</strong></p>`;
+
+                question.options.forEach((option, optIndex) => {
+                    const label = document.createElement('label');
+                    label.className = 'option btn btn-outline-secondary d-block text-start';
+                    label.innerHTML = `
+                        <input type="radio" name="q${index}" value="${optIndex}" class="me-2">
+                        ${option}
+                    `;
+                    questionDiv.appendChild(label);
+                });
+
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'explanation mt-2 container';
+                explanationDiv.id = `explanation${index}`;
+                explanationDiv.style.display = 'none';
+                explanationDiv.innerHTML = `<p><strong>Explanation: </strong>${question.explanation}</p>`;
+                questionDiv.appendChild(explanationDiv);
+
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function submitQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const inputs = quizContainer.querySelectorAll('input[type="radio"]');
+            let answered = new Array(questions.length).fill(false);
+            score = 0;
+
+            // Reset any previous coloring
+            inputs.forEach(input => {
+                input.parentElement.classList.remove('correct', 'incorrect');
+            });
+
+            // Iterate over each question
+            questions.forEach((question, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const options = document.querySelectorAll(`input[name="q${index}"]`);
+
+                // Check if the question was answered
+                if (selected) {
+                    const selectedValue = parseInt(selected.value);
+
+                    // If answer is correct, add score, else deduct points
+                    if (selectedValue === question.correctAnswer) {
+                        score += 1;
+                        selected.parentElement.classList.add('correct');
+                    } else {
+                        score -= 0.25;
+                        selected.parentElement.classList.add('incorrect');
+                    }
+
+                    answered[index] = true;
+                }
+
+                // Mark correct answer if question was not answered or answered incorrectly
+                if (!answered[index] || selected.value != question.correctAnswer) {
+                    options[question.correctAnswer].parentElement.classList.add('correct');
+                }
+
+                // Show explanation for each question
+                document.getElementById(`explanation${index}`).style.display = 'block';
+            });
+
+            // Display the result
+            document.getElementById('result').innerHTML = `<h5>Your Score: ${score}</h5>`;
+        }
+
+        // Load the quiz on page load
+        window.onload = loadQuiz;
+    </script>
+
+</body>
+</html>

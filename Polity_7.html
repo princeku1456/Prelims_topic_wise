@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Quiz - Chapter -2 & 3 </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .question {
+            margin-bottom: 20px;
+        }
+        .option {
+            cursor: pointer;
+            padding: 10px;
+        }
+        .correct {
+            background-color: #d4edda !important;
+            color: green;
+        }
+        .incorrect {
+            background-color: #f8d7da !important;
+            color: red;
+        }
+        .explanation {
+            color: blue;
+        }
+        .center-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container center-div">
+        <div class="col-lg-8 col-md-10 col-sm-12 p-5 border rounded shadow-lg">
+            <h3 class="text-center mb-4">MCQ Quiz - Chapter 12</h3>
+            <div id="quiz-container">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+
+            <button class="btn btn-primary mt-3" onclick="submitQuiz()">Submit</button>
+            <div id="result" class="mt-4"></div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions
+        const questions = [
+    {
+      "text": "Which article of the Indian Constitution describes India as a 'Union of States'?",
+      "options": [
+        "Article 1",
+        "Article 12",
+        "Article 1 of the Constitution describes India as a 'Union of States'",
+        "Article 246"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Article 1 of the Indian Constitution describes India as a 'Union of States'."
+    },
+    {
+      "text": "What is the term used to describe the division of powers between the central government and state governments in a federation?",
+      "options": [
+        "Decentralization",
+        "Federalism",
+        "Unitarism",
+        "Devolution"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Federalism is the term used to describe the division of powers between central and state governments in a federation."
+    },
+    {
+      "text": "Which feature of the Indian Constitution allows the central government to assume greater power during emergencies?",
+      "options": [
+        "Federalism",
+        "Unitary Features",
+        "Judicial Review",
+        "Parliamentary Sovereignty"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The Unitary Features of the Indian Constitution allow the central government to assume greater power during emergencies."
+    },
+    {
+      "text": "What is the name of the list that contains subjects on which only the Parliament of India can make laws?",
+      "options": [
+        "State List",
+        "Concurrent List",
+        "Union List",
+        "Residuary List"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Union List contains subjects on which only the Parliament of India can make laws."
+    },
+    {
+      "text": "Which house of the Indian Parliament must pass a resolution for the Parliament to legislate on a subject in the State List in the national interest?",
+      "options": [
+        "Lok Sabha",
+        "Rajya Sabha",
+        "Both Lok Sabha and Rajya Sabha",
+        "Neither Lok Sabha nor Rajya Sabha"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The Rajya Sabha must pass a resolution for the Parliament to legislate on a subject in the State List in the national interest."
+    },
+    {
+      "text": "Who appoints the Governor of a State in India?",
+      "options": [
+        "Prime Minister",
+        "Chief Minister",
+        "President",
+        "Supreme Court"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The President appoints the Governor of a State in India."
+    },
+    {
+      "text": "What is the name of the body responsible for auditing the accounts of both the central and state governments in India?",
+      "options": [
+        "Finance Commission",
+        "Planning Commission",
+        "Comptroller and Auditor General of India",
+        "Accountant General"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Comptroller and Auditor General of India is responsible for auditing the accounts of both central and state governments."
+    },
+    {
+      "text": "Which article of the Indian Constitution deals with the distribution of legislative powers between the Union and the States?",
+      "options": [
+        "Article 356",
+        "Article 246",
+        "Article 370",
+        "Article 13"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Article 246 deals with the distribution of legislative powers between the Union and the States."
+    },
+    {
+      "text": "What is the name of the list that contains subjects on which both the Parliament and the State Legislatures can make laws?",
+      "options": [
+        "State List",
+        "Concurrent List",
+        "Union List",
+        "Residuary List"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The Concurrent List contains subjects on which both the Parliament and State Legislatures can make laws."
+    },
+    {
+      "text": "Which body is responsible for recommending the distribution of tax revenue between the central government and state governments in India?",
+      "options": [
+        "Planning Commission",
+        "Finance Commission",
+        "Election Commission",
+        "NITI Aayog"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The Finance Commission is responsible for recommending the distribution of tax revenue between central and state governments."
+    },
+    {
+      "text": "Which of the following statements are TRUE about the federal features of the Indian Constitution?<br>1. There is a written and supreme Constitution.<br>2. The judiciary is integrated with the Supreme Court at the top.<br>3. Citizens have only one citizenship, that is, Indian citizenship.<br>4. The Parliament can amend any part of the Constitution without any limitations.",
+      "options": [
+        "1 and 2",
+        "2 and 3",
+        "1, 2 and 3",
+        "All statements are true"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Statements 1, 2, and 3 are true features of Indian federalism. The fourth statement is false as Parliament's power to amend the Constitution is limited by the 'basic structure' doctrine."
+    },
+    {
+      "text": "Identify the CORRECT statements regarding the unitary features of the Indian Constitution:<br>1. The Constitution can be amended by the unilateral action of the Parliament.<br>2. There is a single system of courts enforcing both central and state laws.<br>3. States have no power to alter their boundaries or names.<br>4. The residuary power of legislation rests with the Centre.",
+      "options": [
+        "1, 2 and 3",
+        "2, 3 and 4",
+        "1 and 4",
+        "All four statements"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four statements are correct features of the unitary aspects of the Indian Constitution."
+    },
+    {
+      "text": "Which of the following are features of the Indian federal system?<br>1. Bicameral Legislature at the Centre.<br>2. Appointment of the Governor by the President.<br>3. All India Services common to both the Union and the States.<br>4. Integrated Judiciary.",
+      "options": [
+        "1, 2 and 3",
+        "2, 3 and 4",
+        "1 and 4",
+        "All four statements"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four listed items are features of the Indian federal system."
+    },
+    {
+      "text": "The Indian Constitution provides for three lists that divide the subjects for legislation. Which are CORRECTLY matched?<br>1. Union List – Defence, Foreign Affairs, Currency<br>2. State List - Police, Public Health, Agriculture<br>3. Concurrent List - Criminal Law, Marriage and Divorce, Education<br>4. Residuary List - Subjects not mentioned in any of the three lists",
+      "options": [
+        "1 and 2",
+        "2 and 3",
+        "1, 2 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four statements correctly match the subjects with their respective lists in the Constitution."
+    },
+    {
+      "text": "Which of the following are arguments put forward by critics of the Indian federal system?<br>1. The emergency provisions give excessive power to the Centre<br>2. The Governor's office is used to exercise undue influence on state governments<br>3. The distribution of financial resources is biased towards the Centre<br>4. The All-India Services compromise the autonomy of the states",
+      "options": [
+        "1, 2 and 3",
+        "2, 3 and 4",
+        "1 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four points are common criticisms made by critics of the Indian federal system."
+    },
+    {
+      "text": "Which features of the Indian Constitution were borrowed from the Government of India Act of 1935?<br>1. Federal Scheme<br>2. Office of Governor<br>3. Public Service Commissions<br>4. Emergency Provisions",
+      "options": [
+        "1 and 2",
+        "2 and 3",
+        "1, 2 and 3",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four features were borrowed from the Government of India Act of 1935."
+    },
+    {
+      "text": "Which statements are TRUE regarding the relationship between the Union List and State List?<br>1. The Union List contains subjects of national importance<br>2. The State List contains subjects of regional and local importance<br>3. The Parliament cannot legislate on subjects in the State List under any circumstances<br>4. The State Legislatures can make laws on subjects in the Union List with the President's consent",
+      "options": [
+        "1 and 2",
+        "2 and 3",
+        "3 and 4",
+        "1, 2 and 4"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Only statements 1 and 2 are true. Parliament can legislate on State List subjects under specific circumstances, and States cannot make laws on Union List subjects even with Presidential consent."
+    },
+    {
+      "text": "Which statements are CORRECT regarding the Concurrent List?<br>1. It includes subjects where uniformity of legislation is desirable but not essential<br>2. Both Parliament and State Legislatures can make laws on these subjects<br>3. In case of conflict between central and state law, the state law prevails<br>4. Parliament can make laws on State List subjects if Rajya Sabha passes a resolution",
+      "options": [
+        "1, 2 and 4",
+        "2, 3 and 4",
+        "1 and 2",
+        "All four"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Statements 1, 2, and 4 are correct. Statement 3 is incorrect as central law prevails over state law in case of conflict on concurrent subjects."
+    },
+    {
+      "text": "Which statements are TRUE regarding the Residuary Powers of Legislation?<br>1. Matters not enumerated in any three lists are termed as residuary subjects<br>2. Power to make laws on residuary subjects is vested in State Legislatures<br>3. Residuary Powers include power to levy residuary taxes<br>4. Constitution provides for a separate Residuary List",
+      "options": [
+        "1 and 3",
+        "2 and 4",
+        "3 and 4",
+        "All four"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Only statements 1 and 3 are true. Residuary powers rest with Parliament, not State Legislatures, and there is no separate Residuary List in the Constitution."
+    },
+    {
+      "text": "Which arguments favor a strong Centre in the Indian Federal System?<br>1. To ensure the unity and integrity of the nation<br>2. To promote rapid economic development<br>3. To deal effectively with emergencies like war or external aggression<br>4. To protect the interests of weaker sections and minorities",
+      "options": [
+        "1 and 3",
+        "2 and 4",
+        "1, 3 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four points are valid arguments in favor of maintaining a strong Centre in the Indian Federal System."
+    },
+    {
+      "text": "What criticisms were levelled against the emergency provisions of the Indian Constitution?<br>1. They give excessive power to the Centre at the expense of the States<br>2. They can be misused for partisan political purposes<br>3. They have been frequently invoked even when not strictly necessary<br>4. They can lead to the erosion of fundamental rights and democratic principles",
+      "options": [
+        "1, 2 and 3",
+        "2, 3 and 4",
+        "1 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four points are valid criticisms that have been levelled against the emergency provisions of the Indian Constitution."
+    },
+    {
+      "text": "Which statements highlight the significance of financial relations between the Centre and States?<br>1. A well-defined system of sharing financial resources is essential for smooth federation functioning<br>2. The Constitution lays down a clear and equitable formula for tax revenue distribution<br>3. The Finance Commission plays a crucial role in ensuring fair resource allocation<br>4. The central government has no power to impose limits on state borrowing",
+      "options": [
+        "1 and 3",
+        "2 and 4",
+        "3 and 4",
+        "1, 2 and 3"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Only statements 1 and 3 are correct. Statement 2 is not entirely true, and statement 4 is false as the Centre can impose limits on state borrowing during financial emergencies."
+    },
+    {
+      "text": "Which statements are TRUE regarding the role of Governor in the Indian federal system?<br>1. The Governor acts as a link between Centre and State<br>2. The Governor is appointed by President and holds office during pleasure of Prime Minister<br>3. The Governor can reserve certain bills for President's consideration<br>4. The Governor has no discretionary powers",
+      "options": [
+        "1 and 3",
+        "2 and 4",
+        "3 and 4",
+        "All four"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Only statements 1 and 3 are true. The Governor holds office during President's pleasure, not Prime Minister's, and does have certain discretionary powers."
+    },
+    {
+      "text": "Which were key recommendations of the Sarkaria Commission on Centre-State Relations (1983-87)?<br>1. Greater autonomy to the States<br>2. Abolition of Article 356 (President's Rule)<br>3. Constitutional status to the Inter-State Council<br>4. Setting up of a permanent Finance Commission",
+      "options": [
+        "1 and 2",
+        "2 and 3",
+        "1, 3 and 4",
+        "1 and 3"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Commission recommended greater state autonomy, constitutional status for Inter-State Council, and a permanent Finance Commission. They didn't recommend abolishing Article 356, only modifying it."
+    },
+    {
+      "text": "Which provisions in the Indian Constitution reflect 'cooperative federalism'?<br>1. The existence of the Concurrent List<br>2. The provision for Inter-State Councils<br>3. The provision for All-India Services<br>4. The provision for distribution of tax revenue",
+      "options": [
+        "1 and 2",
+        "2 and 3",
+        "1, 2 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four provisions reflect the principle of cooperative federalism in the Indian Constitution."
+    },
+    {
+      "text": "Which statements are TRUE about the nature of Indian federalism?<br>1. It is a rigid form of federalism with clear power separation<br>2. It is a dynamic and evolving system<br>3. It has a bias towards a strong central government<br>4. It promotes cooperation between Centre and States",
+      "options": [
+        "1 and 3",
+        "2 and 4",
+        "2, 3 and 4",
+        "All four"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Statements 2, 3, and 4 are true. Indian federalism is not rigid but flexible, allowing for adaptability while maintaining a strong central bias and promoting cooperation."
+    },
+    {
+      "text": "Which criticisms are made about federalism's practical working in India?<br>1. Central government often encroaches upon state powers<br>2. Governor's office is used to destabilize opposition-ruled states<br>3. Financial resource distribution is not always fair<br>4. All India Services create dual loyalty among officials",
+      "options": [
+        "1, 2 and 3",
+        "2, 3 and 4",
+        "1 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four points are common criticisms of how federalism works in practice in India."
+    },
+    {
+      "text": "What are the strengths of the Indian federal system?<br>1. Maintained unity and integrity of a vast diverse country<br>2. Provided framework for economic development<br>3. Fostered democratic values at national and state levels<br>4. Successfully dealt with secessionist movements",
+      "options": [
+        "1 and 3",
+        "2 and 4",
+        "1, 3 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four points highlight the strengths of the Indian federal system."
+    },
+    {
+      "text": "What major challenges face the Indian federal system in the 21st century?<br>1. Growing regional disparities and demands for autonomy<br>2. Rise of identity politics and linguistic conflicts<br>3. Need for more efficient resource distribution<br>4. Increasing complexity of policy-making in a globalized world",
+      "options": [
+        "1, 2 and 3",
+        "2, 3 and 4",
+        "1 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four are significant challenges facing the Indian federal system in the 21st century."
+    },
+    {
+      "text": "Which developments have significantly impacted Indian federalism recently?<br>1. Economic liberalization and globalization<br>2. Rise of regional political parties<br>3. Increasing role of judiciary in Centre-State disputes<br>4. Emergence of coalition governments",
+      "options": [
+        "1 and 2",
+        "2 and 3",
+        "1, 2 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four developments have significantly impacted the functioning of Indian federalism in recent times."
+    },
+    {
+      "text": "Which are the legislative powers of the Centre?<br>1. Make laws on Union List subjects<br>2. Make laws on State List subjects under five special circumstances<br>3. Make laws on Concurrent List subjects<br>4. Power over residuary subjects",
+      "options": [
+        "1 and 3",
+        "2 and 4",
+        "1, 3 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four statements correctly describe the legislative powers of the Centre."
+    },
+    {
+      "text": "What were recommendations of the West Bengal Memorandum on Centre-State relations (1977)?<br>1. Centre's jurisdiction confined to defense, foreign affairs, currency, communications and economic coordination<br>2. All other subjects including residuary vested in states<br>3. Articles 356, 357 and 360 should be repealed<br>4. 75% of total Centre revenue should go to states",
+      "options": [
+        "1 and 3",
+        "2 and 4",
+        "1, 3 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four points were recommendations made by the West Bengal Memorandum on Centre-State relations."
+    },
+    {
+      "text": "Which provisions ensure financial relations between Centre and States?<br>1. Allocation of taxing powers to both Centre and States<br>2. Sharing of tax revenue collected by Centre with States<br>3. Grants-in-aid from Centre to States<br>4. States have complete autonomy in deciding budgets",
+      "options": [
+        "1, 2 and 3",
+        "2, 3 and 4",
+        "1 and 4",
+        "All four"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Statements 1, 2, and 3 are correct. Statement 4 is incorrect as the Centre can impose limits on states' borrowing powers."
+    },
+    {
+      "text": "Which statements are TRUE regarding the Inter-State Council?<br>1. Set up under Article 263 on Sarkaria Commission's recommendation<br>2. It is a permanent body for resolving inter-state disputes<br>3. It is headed by the Prime Minister<br>4. It promotes cooperation among States",
+      "options": [
+        "1 and 3",
+        "2 and 4",
+        "1, 3 and 4",
+        "All four"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Statements 1, 3, and 4 are correct. While meant to be permanent, the Inter-State Council hasn't always functioned consistently."
+    },
+    {
+      "text": "Which statements are TRUE about Administrative Relations between Centre and States?<br>1. Centre can give directions to States on national matters<br>2. All-India Services serve as unifying force<br>3. States have complete administrative autonomy<br>4. Centre can deploy armed forces without State consent",
+      "options": [
+        "1 and 2",
+        "2 and 3",
+        "3 and 4",
+        "All four"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Only statements 1 and 2 are true. States don't have complete autonomy, and armed forces deployment generally requires state consent."
+    },
+    {
+      "text": "Which statements are CORRECT about Governor's appointment and role?<br>1. Appointed by President and holds office during President's pleasure<br>2. Acts as link between Centre and State<br>3. Has no discretionary powers<br>4. Position criticized as prone to political misuse",
+      "options": [
+        "1, 2 and 3",
+        "2, 3 and 4",
+        "1 and 2",
+        "1, 2 and 4"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Statements 1, 2, and 4 are correct. The Governor does have some discretionary powers in certain situations."
+    },
+    {
+      "text": "Which areas require crucial Centre-State cooperation for effective governance?<br>1. Maintaining law and order<br>2. Promoting economic development<br>3. Protecting the environment<br>4. Managing natural disasters",
+      "options": [
+        "1 and 3",
+        "2 and 4",
+        "1, 3 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four areas require crucial cooperation between Centre and States for effective governance."
+    },
+    {
+      "text": "Which are challenges to smooth Centre-State relations?<br>1. Lack of adequate financial resources for states<br>2. Delay in release of funds from Centre<br>3. Misuse of Article 356 for political purposes<br>4. Lack of effective coordination",
+      "options": [
+        "1, 2 and 3",
+        "2, 3 and 4",
+        "1 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four points represent challenges to smooth functioning of Centre-State relations in India."
+    },
+    {
+      "text": "Which demands were made by States for greater autonomy?<br>1. More control over financial resources<br>2. Greater say in Governor appointments<br>3. Abolition of All India Services<br>4. More powers for Concurrent List legislation",
+      "options": [
+        "1, 2 and 3",
+        "2, 3 and 4",
+        "1 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four demands have been raised by various States seeking greater autonomy."
+    },
+    {
+      "text": "Which reforms could strengthen Indian federalism?<br>1. Empowering Inter-State Council for dispute resolution<br>2. Ensuring more equitable financial resource distribution<br>3. Implementing Sarkaria Commission recommendations<br>4. Promoting greater awareness of federalism principles",
+      "options": [
+        "1, 2 and 3",
+        "2, 3 and 4",
+        "1 and 4",
+        "All four"
+      ],
+      "correctAnswer": 3,
+      "explanation": "All four points are potential reforms that could strengthen Indian federalism."
+    }
+  ]
+  
+  let score = 0;
+
+        // Dynamically create quiz questions
+        function loadQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = '';
+
+            questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<p><strong>${index + 1}. ${question.text}</strong></p>`;
+
+                question.options.forEach((option, optIndex) => {
+                    const label = document.createElement('label');
+                    label.className = 'option btn btn-outline-secondary d-block text-start';
+                    label.innerHTML = `
+                        <input type="radio" name="q${index}" value="${optIndex}" class="me-2">
+                        ${option}
+                    `;
+                    questionDiv.appendChild(label);
+                });
+
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'explanation mt-2 container';
+                explanationDiv.id = `explanation${index}`;
+                explanationDiv.style.display = 'none';
+                explanationDiv.innerHTML = `<p><strong>Explanation: </strong>${question.explanation}</p>`;
+                questionDiv.appendChild(explanationDiv);
+
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function submitQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const inputs = quizContainer.querySelectorAll('input[type="radio"]');
+            let answered = new Array(questions.length).fill(false);
+            score = 0;
+
+            // Reset any previous coloring
+            inputs.forEach(input => {
+                input.parentElement.classList.remove('correct', 'incorrect');
+            });
+
+            // Iterate over each question
+            questions.forEach((question, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const options = document.querySelectorAll(`input[name="q${index}"]`);
+
+                // Check if the question was answered
+                if (selected) {
+                    const selectedValue = parseInt(selected.value);
+
+                    // If answer is correct, add score, else deduct points
+                    if (selectedValue === question.correctAnswer) {
+                        score += 1;
+                        selected.parentElement.classList.add('correct');
+                    } else {
+                        score -= 0.25;
+                        selected.parentElement.classList.add('incorrect');
+                    }
+
+                    answered[index] = true;
+                }
+
+                // Mark correct answer if question was not answered or answered incorrectly
+                if (!answered[index] || selected.value != question.correctAnswer) {
+                    options[question.correctAnswer].parentElement.classList.add('correct');
+                }
+
+                // Show explanation for each question
+                document.getElementById(`explanation${index}`).style.display = 'block';
+            });
+
+            // Display the result
+            document.getElementById('result').innerHTML = `<h5>Your Score: ${score}</h5>`;
+        }
+
+        // Load the quiz on page load
+        window.onload = loadQuiz;
+    </script>
+
+</body>
+</html>

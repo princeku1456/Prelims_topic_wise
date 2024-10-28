@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Quiz - Chapter -2 & 3 </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .question {
+            margin-bottom: 20px;
+        }
+        .option {
+            cursor: pointer;
+            padding: 10px;
+        }
+        .correct {
+            background-color: #d4edda !important;
+            color: green;
+        }
+        .incorrect {
+            background-color: #f8d7da !important;
+            color: red;
+        }
+        .explanation {
+            color: blue;
+        }
+        .center-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container center-div">
+        <div class="col-lg-8 col-md-10 col-sm-12 p-5 border rounded shadow-lg">
+            <h3 class="text-center mb-4">MCQ Quiz - Chapter 7</h3>
+            <div id="quiz-container">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+
+            <button class="btn btn-primary mt-3" onclick="submitQuiz()">Submit</button>
+            <div id="result" class="mt-4"></div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions
+        const questions =  [
+    {
+      "text": "Which article of the Indian Constitution guarantees the right to freedom of speech and expression?",
+      "options": [
+        "Article 14",
+        "Article 19",
+        "Article 21",
+        "Article 25"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Article 19 of the Indian Constitution guarantees six freedoms, including the right to freedom of speech and expression."
+    },
+    {
+      "text": "Which fundamental right was removed from the list of fundamental rights by the 44th Amendment Act of 1978?",
+      "options": [
+        "Right to Equality",
+        "Right to Freedom",
+        "Right to Life and Personal Liberty",
+        "Right to Property"
+      ],
+      "correctAnswer": 3,
+      "explanation": "The Right to Property was originally a Fundamental Right under Article 31. However, it was removed from the list of Fundamental Rights by the 44th Amendment Act of 1978 and converted into a legal right under Article 300A."
+    },
+    {
+      "text": "The right to freedom of religion in India does not include the right to:",
+      "options": [
+        "Profess any religion",
+        "Practice any religion",
+        "Propagate any religion",
+        "Convert others to one's religion by force"
+      ],
+      "correctAnswer": 3,
+      "explanation": "While the Indian Constitution guarantees the freedom to profess, practice, and propagate any religion, forceful conversions are strictly prohibited."
+    },
+    {
+      "text": "Which of the following is not a ground for restricting the right to freedom of assembly?",
+      "options": [
+        "Public order",
+        "Morality",
+        "Health",
+        "National security"
+      ],
+      "correctAnswer": 3,
+      "explanation": "The Right to Freedom of Assembly can be restricted on grounds of public order, morality, and health, but not national security. Restrictions based on national security usually fall under other legal provisions."
+    },
+    {
+      "text": "The right to form associations or unions does not extend to:",
+      "options": [
+        "Students",
+        "Teachers",
+        "Workers",
+        "Criminals"
+      ],
+      "correctAnswer": 3,
+      "explanation": "The right to form associations or unions is a fundamental right, but this right is not extended to criminals as it could impede law enforcement and public safety."
+    },
+    {
+      "text": "The right to move freely throughout the territory of India is subject to restrictions imposed:",
+      "options": [
+        "In the interest of the general public",
+        "In the interest of the Scheduled Tribes",
+        "In the interest of the armed forces",
+        "In the interest of the President"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The right to move freely throughout India can be restricted in the interest of the general public or for the protection of the interests of Scheduled Tribes."
+    },
+    {
+      "text": "The right to reside and settle in any part of the territory of India is:",
+      "options": [
+        "An absolute right",
+        "Not a fundamental right",
+        "Subject to reasonable restrictions",
+        "Available only to citizens born in India"
+      ],
+      "correctAnswer": 2,
+      "explanation": "While the right to reside and settle in any part of India is a fundamental right, it can be reasonably restricted by the state for various reasons, such as maintaining public order."
+    },
+    {
+      "text": "The right to practice any profession or to carry on any occupation, trade or business is:",
+      "options": [
+        "Available only to citizens of India",
+        "Subject to qualifications prescribed by law",
+        "Not subject to any restrictions",
+        "Automatically available to all persons above 18 years of age"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The right to practice any profession or carry on any occupation, trade, or business is subject to qualifications prescribed by law to ensure professional standards and public safety."
+    },
+    {
+      "text": "Article 21 of the Indian Constitution guarantees the right to:",
+      "options": [
+        "Education",
+        "Employment",
+        "Life and personal liberty",
+        "Shelter"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Article 21 guarantees the right to life and personal liberty, which has been interpreted broadly by the Supreme Court to include various aspects of a dignified life."
+    },
+    {
+      "text": "The 'due process of law' doctrine in the Indian context means:",
+      "options": [
+        "A law depriving a person of 'life or personal liberty' must prescribe a procedure that is reasonable, fair and just",
+        "Any law passed by the Parliament is valid, regardless of its content",
+        "Courts cannot review the validity of laws",
+        "The executive has the power to make laws"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The 'due process of law' doctrine ensures that any law curtailing the right to life and personal liberty must prescribe a procedure that meets standards of fairness and justice."
+    },
+    {
+      "text": "The right to education is guaranteed as a fundamental right under:",
+      "options": [
+        "Article 14",
+        "Article 19",
+        "Article 21A",
+        "Article 25"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Right to Education was added as a fundamental right under Article 21A by the 86th Amendment Act of 2002."
+    },
+    {
+      "text": "The right to education as a fundamental right is available to:",
+      "options": [
+        "All persons",
+        "All children between the ages of 6 and 14 years",
+        "All citizens of India",
+        "Only economically weaker sections"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Article 21A guarantees the right to free and compulsory education for all children between the ages of 6 and 14 years."
+    },
+    {
+      "text": "The right of minorities to establish and administer educational institutions is guaranteed under:",
+      "options": [
+        "Article 15",
+        "Article 29",
+        "Article 30",
+        "Article 32"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Article 30 specifically guarantees the right of minorities to establish and administer educational institutions of their choice."
+    },
+    {
+      "text": "Minority educational institutions:",
+      "options": [
+        "Are exempt from all laws of the land",
+        "Have the right to maladminister",
+        "Can be subjected to regulatory measures for ensuring educational character and standards",
+        "Cannot receive any aid from the State"
+      ],
+      "correctAnswer": 2,
+      "explanation": "While minority institutions have the right to administer their affairs, they can be subject to reasonable regulations to ensure quality education and ethical management."
+    },
+    {
+      "text": "The right to constitutional remedies means:",
+      "options": [
+        "The right to file a complaint with the police",
+        "The right to approach the Supreme Court or High Courts for the enforcement of fundamental rights",
+        "The right to seek compensation from the government",
+        "The right to protest against the government"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The right to constitutional remedies empowers citizens to move the higher courts for the protection and enforcement of their fundamental rights."
+    },
+    {
+      "text": "Which writ can be issued to release a person unlawfully detained?",
+      "options": [
+        "Habeas Corpus",
+        "Mandamus",
+        "Certiorari",
+        "Quo Warranto"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The writ of Habeas Corpus is a powerful legal tool used to secure the release of a person who is unlawfully detained or imprisoned."
+    },
+    {
+      "text": "Which writ can be issued to an inferior court or tribunal to prevent it from exceeding its jurisdiction?",
+      "options": [
+        "Habeas Corpus",
+        "Mandamus",
+        "Prohibition",
+        "Quo Warranto"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The writ of Prohibition is issued by a higher court to an inferior court or tribunal, preventing it from exceeding its jurisdiction or exercising powers it doesn't possess."
+    },
+    {
+      "text": "Which writ can be issued to quash the order of an inferior court or tribunal?",
+      "options": [
+        "Habeas Corpus",
+        "Mandamus",
+        "Certiorari",
+        "Quo Warranto"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The writ of Certiorari is used by a higher court to quash the order of an inferior court or tribunal if it is found to have acted illegally or without jurisdiction."
+    },
+    {
+      "text": "Which writ can be issued to inquire into the legality of a person holding a public office?",
+      "options": [
+        "Habeas Corpus",
+        "Mandamus",
+        "Prohibition",
+        "Quo Warranto"
+      ],
+      "correctAnswer": 3,
+      "explanation": "The writ of Quo Warranto is issued to inquire into the legality of a person holding a public office. It challenges the authority under which the office is held."
+    },
+    {
+      "text": "Article 32 of the Indian Constitution:",
+      "options": [
+        "Is a fundamental right itself",
+        "Is not a fundamental right",
+        "Can be suspended during an emergency",
+        "Is available only to citizens of India"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Article 32, guaranteeing the right to move the Supreme Court for the enforcement of fundamental rights, is considered a fundamental right itself."
+    },
+    {
+      "text": "Which of the following statements are correct regarding Fundamental Rights?<br>1. They are justiciable in nature.<br>2. They can be suspended during a national emergency.<br>3. They are absolute and cannot be subject to any restrictions.<br>4. They are available to both citizens and foreigners.",
+      "options": [
+        "(i), (ii) and (iii) only",
+        "(i) and (ii) only",
+        "(ii) and (iv) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Fundamental Rights are justiciable (can be enforced in court) and can be suspended during a national emergency. However, they are not absolute and can be subject to reasonable restrictions. They are primarily meant for citizens, though some rights are available to foreigners as well."
+    },
+    {
+      "text": "Which of the following statements are correct regarding the Right to Freedom of Religion?<br>1. It includes the freedom to manage religious affairs.<br>2. It includes the freedom to acquire and administer property for religious purposes.<br>3. It includes the freedom to convert others to one's religion by force.<br>4. It is subject to public order, morality and health.",
+      "options": [
+        "(i), (ii) and (iii) only",
+        "(i), (ii) and (iv) only",
+        "(ii) and (iv) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The Right to Freedom of Religion includes the freedom to manage religious affairs, acquire and administer property for religious purposes, and is subject to limitations based on public order, morality, and health. However, it does not permit forceful conversions."
+    },
+    {
+      "text": "Which of the following statements are correct regarding the Right to Freedom of Movement?<br>1. It includes the right to move freely throughout the territory of India.<br>2. It includes the right to reside and settle in any part of the territory of India.<br>3. It includes the right to travel abroad.<br>4. It is subject to reasonable restrictions in the interest of the general public or the protection of the interests of any Scheduled Tribe.",
+      "options": [
+        "(i), (ii) and (iii) only",
+        "(i), (ii) and (iv) only",
+        "(ii) and (iv) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The Right to Freedom of Movement guarantees free movement within India, the right to reside and settle in any part of India, and is subject to reasonable restrictions for the general public or the protection of Scheduled Tribes. The right to travel abroad is not explicitly included."
+    },
+    {
+      "text": "Which of the following statements are correct regarding the Right to Education?<br>1. It is a fundamental right under Article 21A of the Constitution.<br>2. It is available to all children between the ages of 6 and 14 years.<br>3. It includes the right to free and compulsory education.<br>4. It applies to all educational institutions, including private institutions.",
+      "options": [
+        "(i), (ii) and (iii) only",
+        "(i) and (ii) only",
+        "(ii) and (iv) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The Right to Education is under Article 21A, guarantees free and compulsory education to children aged 6 to 14, but it doesn't necessarily apply to all private institutions. While private schools are expected to comply with certain regulations, the extent of their inclusion varies based on specific laws and policies."
+    },
+    {
+      "text": "Which of the following statements are correct regarding the Right to Constitutional Remedies?<br>1. It is guaranteed under Article 32 of the Constitution.<br>2. It allows citizens to approach the Supreme Court for the enforcement of their fundamental rights.<br>3. It can be suspended during a national emergency.<br>4. It is available only to citizens of India.",
+      "options": [
+        "(i), (ii) and (iii) only",
+        "(i) and (ii) only",
+        "(ii) and (iv) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Article 32 guarantees the right to constitutional remedies, allowing citizens to approach the Supreme Court for the enforcement of their fundamental rights. This right cannot be suspended during an emergency and is primarily for citizens."
+    },
+    {
+      "text": "Which of the following are writs that can be issued by the Supreme Court for the enforcement of Fundamental Rights?<br>i. Habeas Corpus<br>ii. Mandamus<br>iii. Certiorari<br>iv. Prohibition",
+      "options": [
+        "(i) and (ii) only",
+        "(ii) and (iii) only",
+        "(i), (ii) and (iii) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 3,
+      "explanation": "The Supreme Court can issue all four writs - Habeas Corpus, Mandamus, Certiorari, and Prohibition to enforce Fundamental Rights."
+    },
+    {
+      "text": "Which of the following statements are correct regarding the 'due process of law' doctrine?<br>i. It originated in the United States<br>ii. It was introduced in India through the Gopalan case (1950)<br>iii. The Menaka case (1978) expanded the scope of 'due process of law' in India<br>iv. It ensures that any procedure prescribed by law must be reasonable, fair and just",
+      "options": [
+        "(i), (ii) and (iii) only",
+        "(i), (iii) and (iv) only",
+        "(ii) and (iv) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The 'due process of law' originated in the US and was expanded in India by the Menaka case. It ensures procedures are fair, just, and reasonable. However, the Gopalan case initially provided a narrower interpretation of the doctrine."
+    },
+    {
+      "text": "Which of the following are considered exceptions to the Right to Freedom of Speech and Expression?<br>i. Contempt of Court<br>ii. Defamation<br>iii. Incitement to an offence<br>iv. Sedition",
+      "options": [
+        "(i) and (ii) only",
+        "(ii) and (iii) only",
+        "(i), (ii) and (iii) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Contempt of court, defamation, incitement to an offence, and sedition are all recognized as exceptions to the Right to Freedom of Speech and Expression."
+    },
+    {
+      "text": "Which of the following statements are correct regarding the Right to Freedom of Assembly?<br>i. It is an absolute right and cannot be subject to any restrictions<br>ii. It includes the right to hold public meetings<br>iii. It is subject to reasonable restrictions in the interests of public order, sovereignty and integrity of India<br>iv. It allows for the use of force during assemblies",
+      "options": [
+        "(i) and (ii) only",
+        "(ii) and (iii) only",
+        "(i), (ii) and (iii) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The Right to Freedom of Assembly includes the right to hold public meetings but is subject to restrictions for public order, sovereignty, and integrity of India. It is not absolute and does not permit the use of force."
+    },
+    {
+      "text": "Which of the following are freedoms guaranteed under the Right to Freedom (Article 19)?<br>i. Freedom of speech and expression<br>ii. Freedom of assembly<br>iii. Freedom of association<br>iv. Freedom of movement",
+      "options": [
+        "(i) and (ii) only",
+        "(ii) and (iii) only",
+        "(i), (ii) and (iii) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Article 19 guarantees all these freedoms - speech and expression, assembly, association, and movement as core freedoms within a democratic framework."
+    },
+    {
+      "text": "Which of the following statements are true regarding the right to life and personal liberty (Article 21)?<br>i. It is a fundamental right<br>ii. It can be deprived of by the state through a procedure established by law<br>iii. The procedure must be fair, just and reasonable<br>iv. It is an absolute right",
+      "options": [
+        "(i), (ii) and (iii) only",
+        "(i) and (ii) only",
+        "(ii) and (iv) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Article 21 guarantees the right to life and personal liberty as a fundamental right, which can be restricted through fair, just, and reasonable procedures established by law. It is not an absolute right."
+    },
+    {
+      "text": "The Right against Exploitation prohibits:<br>i. Traffic in human beings<br>ii. Begar (forced labour)<br>iii. Child labour<br>iv. Discrimination on the basis of religion",
+      "options": [
+        "(i) and (ii) only",
+        "(ii) and (iii) only",
+        "(i), (ii) and (iii) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Right against Exploitation prohibits traffic in human beings, forced labour (begar), and child labour. Discrimination based on religion is covered under the Right to Equality."
+    },
+    {
+      "text": "The concept of 'personal liberty' in Article 21 has been interpreted by the Supreme Court to include:<br>i. Right to privacy<br>ii. Right to a clean environment<br>iii. Right to livelihood<br>iv. Right to travel abroad",
+      "options": [
+        "(i) and (ii) only",
+        "(ii) and (iii) only",
+        "(i), (ii) and (iii) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Supreme Court's interpretation of 'personal liberty' includes the right to privacy, clean environment, and livelihood. While the right to travel abroad is recognised, it's not directly derived from Article 21."
+    },
+    {
+      "text": "Which of the following statements are correct regarding the powers of the Parliament to amend Fundamental Rights?<br>i. The Parliament can amend any part of the Constitution, including Fundamental Rights<br>ii. Fundamental Rights are not absolute and can be amended by the Parliament<br>iii. The Parliament cannot amend the basic structure of the Constitution<br>iv. The power of the Parliament to amend Fundamental Rights is subject to judicial review",
+      "options": [
+        "(i), (ii) and (iii) only",
+        "(ii), (iii) and (iv) only",
+        "(i) and (iv) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Fundamental Rights can be amended by Parliament, but the basic structure is inviolable. The power to amend is subject to judicial review to protect the basic structure."
+    },
+    {
+      "text": "Which of the following statements are true regarding the relationship between Fundamental Rights and Directive Principles of State Policy?<br>i. Fundamental Rights are justiciable, while Directive Principles are not<br>ii. Fundamental Rights are enforceable in a court of law, while Directive Principles are not<br>iii. Fundamental Rights and Directive Principles are complementary to each other<br>iv. Directive Principles are superior to Fundamental Rights",
+      "options": [
+        "(i) and (ii) only",
+        "(ii) and (iii) only",
+        "(i), (ii) and (iii) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Fundamental Rights are justiciable and enforceable, while Directive Principles are not. They are complementary but Directive Principles are not superior to Fundamental Rights."
+    },
+    {
+      "text": "The following statements are true in relation to the right to freedom of religion (Article 25):<br>i. It includes the freedom of conscience<br>ii. It guarantees the freedom to profess, practice and propagate religion<br>iii. It is subject to restrictions imposed on grounds of public order, morality and health<br>iv. It permits the state to levy taxes for the promotion of any particular religion",
+      "options": [
+        "(i), (ii) and (iii) only",
+        "(i) and (ii) only",
+        "(ii) and (iv) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Article 25 guarantees freedom of conscience and religious freedoms, subject to public order, morality, and health. It does not permit state taxation for promoting any particular religion."
+    },
+    {
+      "text": "Consider the following statements regarding the Right to Equality (Article 14):<br>i. It guarantees equality before the law<br>ii. It prohibits discrimination on the basis of religion, race, caste, sex or place of birth<br>iii. It allows for special provisions for women and children<br>iv. It guarantees absolute equality in all aspects of life",
+      "options": [
+        "(i), (ii) and (iii) only",
+        "(i) and (ii) only",
+        "(ii) and (iv) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Article 14 guarantees equality before law, prohibits discrimination, and allows special provisions for women and children. It does not guarantee absolute equality as reasonable classifications are permitted."
+    },
+    {
+      "text": "Which of the following statements are correct regarding the limitations on Fundamental Rights?<br>i. Fundamental Rights are not absolute and are subject to reasonable restrictions<br>ii. Restrictions can be imposed by the state in the interests of national security, public order, morality and health<br>iii. The Parliament can restrict Fundamental Rights through ordinary legislation<br>iv. The judiciary has the power to review the validity of restrictions imposed on Fundamental Rights",
+      "options": [
+        "(i), (ii) and (iii) only",
+        "(ii), (iii) and (iv) only",
+        "(i) and (iv) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Fundamental Rights are subject to reasonable restrictions imposed by the state for various reasons, through legislation, and these restrictions are subject to judicial review."
+    },
+    {
+      "text": "Which of the following statements are correct regarding the Right to Property?<br>i. It was originally included in the Constitution as a Fundamental Right<br>ii. It was removed from the list of Fundamental Rights by the 44th Amendment Act, 1978<br>iii. It is now considered a legal right under Article 300A<br>iv. The state can acquire private property for public purposes without providing any compensation",
+      "options": [
+        "(i), (ii) and (iii) only",
+        "(i) and (ii) only",
+        "(ii) and (iv) only",
+        "(i), (ii), (iii) and (iv)"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The Right to Property was initially a Fundamental Right but was removed by the 44th Amendment and became a legal right under Article 300A. The state must provide compensation when acquiring private property."
+    }
+  ]
+  
+  let score = 0;
+
+        // Dynamically create quiz questions
+        function loadQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = '';
+
+            questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<p><strong>${index + 1}. ${question.text}</strong></p>`;
+
+                question.options.forEach((option, optIndex) => {
+                    const label = document.createElement('label');
+                    label.className = 'option btn btn-outline-secondary d-block text-start';
+                    label.innerHTML = `
+                        <input type="radio" name="q${index}" value="${optIndex}" class="me-2">
+                        ${option}
+                    `;
+                    questionDiv.appendChild(label);
+                });
+
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'explanation mt-2 container';
+                explanationDiv.id = `explanation${index}`;
+                explanationDiv.style.display = 'none';
+                explanationDiv.innerHTML = `<p><strong>Explanation: </strong>${question.explanation}</p>`;
+                questionDiv.appendChild(explanationDiv);
+
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function submitQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const inputs = quizContainer.querySelectorAll('input[type="radio"]');
+            let answered = new Array(questions.length).fill(false);
+            score = 0;
+
+            // Reset any previous coloring
+            inputs.forEach(input => {
+                input.parentElement.classList.remove('correct', 'incorrect');
+            });
+
+            // Iterate over each question
+            questions.forEach((question, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const options = document.querySelectorAll(`input[name="q${index}"]`);
+
+                // Check if the question was answered
+                if (selected) {
+                    const selectedValue = parseInt(selected.value);
+
+                    // If answer is correct, add score, else deduct points
+                    if (selectedValue === question.correctAnswer) {
+                        score += 1;
+                        selected.parentElement.classList.add('correct');
+                    } else {
+                        score -= 0.25;
+                        selected.parentElement.classList.add('incorrect');
+                    }
+
+                    answered[index] = true;
+                }
+
+                // Mark correct answer if question was not answered or answered incorrectly
+                if (!answered[index] || selected.value != question.correctAnswer) {
+                    options[question.correctAnswer].parentElement.classList.add('correct');
+                }
+
+                // Show explanation for each question
+                document.getElementById(`explanation${index}`).style.display = 'block';
+            });
+
+            // Display the result
+            document.getElementById('result').innerHTML = `<h5>Your Score: ${score}</h5>`;
+        }
+
+        // Load the quiz on page load
+        window.onload = loadQuiz;
+    </script>
+
+</body>
+</html>
